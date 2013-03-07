@@ -4,6 +4,18 @@ ruby_enccomment.vim
 Insert `# encoding: utf-8` magic commet for Ruby 1.9 and above.
 
 
+Usage
+=====
+
+- Call `do` function in Vim:
+
+    :call ruby_enccomment#do()
+
+- Batch processing from zsh:
+
+    vim -p $(echo `find app/models -type f -print0` -c 'tabdo call ruby_enccomment#do(0,1)')
+
+
 Similar Projects
 ================
 
