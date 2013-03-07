@@ -1,0 +1,44 @@
+*ruby_enccomment.txt*                       Insert ruby magic encoding comment
+
+Version:    0.1.0
+Author:     bootleq <bootleq@gmail.com>
+License:    Public Domain
+Repository: https://github.com/bootleq/vim-ruby-enccomment
+
+==============================================================================
+CONTENTS                                            *ruby_enccomment-contents*
+
+    Introduction  ........................ |ruby_enccomment-introduction|
+    Usage  ............................... |ruby_enccomment-usage|
+    Options  ............................. |ruby_enccomment-options|
+
+==============================================================================
+INTRODUCTION                                    *ruby_enccomment-introduction*
+
+While Ruby began multilingualization support since version 1.9, we must add
+"magic comment" to every script with non-ASCII characters in source.
+
+*ruby_enccomment* provides a function to insert them, with some options for
+customization. And hopefully, with Vim script, more fun during implementing.
+
+Doc about magic comment: (in Japanese)
+http://doc.ruby-lang.org/ja/1.9.3/doc/spec=2fm17n.html#magic_comment
+
+==============================================================================
+USAGE                                                  *ruby_enccomment-usage*
+
+Do the insertion >
+  :call ruby_enccomment#do()
+<
+
+==============================================================================
+OPTIONS                                              *ruby_enccomment-options*
+
+You can set below options in g: scope (|g:var|), otherwise their internal (s:)
+default values will be used.
+
+filetypes          (default: see below) ~
+
+
+==============================================================================
+vim:tw=78:fo=tcroq2mM:et:sts=2:sw=2:ft=help:norl:
