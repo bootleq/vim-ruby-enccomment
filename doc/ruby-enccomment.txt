@@ -11,6 +11,7 @@ CONTENTS                                            *ruby_enccomment-contents*
     Introduction  ........................ |ruby_enccomment-introduction|
     Usage  ............................... |ruby_enccomment-usage|
     Options  ............................. |ruby_enccomment-options|
+    Config example  ...................... |ruby_enccomment-config-examples|
 
 ==============================================================================
 INTRODUCTION                                    *ruby_enccomment-introduction*
@@ -27,9 +28,24 @@ http://doc.ruby-lang.org/ja/1.9.3/doc/spec=2fm17n.html#magic_comment
 ==============================================================================
 USAGE                                                  *ruby_enccomment-usage*
 
-Do the insertion >
+------------------------------------------------------------------------------
+Call the main function: >
   :call ruby_enccomment#do()
 <
+
+ruby_enccomment#do( [{verbose} [, {inplace}]])          *ruby_enccomment#do()*
+
+  Insert a "magic comment" line if necessary.
+  If {verbose} is non-zero, no message will be echoed when no line inserted.
+  If {inplace} is zero, |:update| the file in place after insertion.
+
+------------------------------------------------------------------------------
+Batch processing
+
+For batch files processing, below is an example for zsh: >
+  vim -p $(echo `find . -print0` -c 'tabdo call ruby_enccomment#do(0,1)')
+<
+this opens all files, inserts encoding comments, and saves if changed.
 
 ==============================================================================
 OPTIONS                                              *ruby_enccomment-options*
@@ -37,8 +53,87 @@ OPTIONS                                              *ruby_enccomment-options*
 You can set below options in g: scope (|g:var|), otherwise their internal (s:)
 default values will be used.
 
-filetypes          (default: see below) ~
+                                           *ruby_enccomment-options-filetypes*
+filetypes           (default: see below) ~
 
+  Define what |filetype| of files may have magic comments, and what comment
+  format to use for them.
+  The value is a |Dictionary| with keys for |'filetype'| and values for
+  options.
+
+  Default value: >
+    { 'ruby': {'comment_format': '# %s'} }
+< which is, only do further evaluation if the filetype is "ruby", and the
+  comment text will be `printf('# %s', some_comment_string)`.
+  See |ruby_enccomment-options-encodings| for comment string detail.
+
+shebang_pattern     (default: '^#!') ~
+
+  Pattern for testing if the first line is shebang.
+  Magic comment must go next line when shebang presents.
+
+is_comment_patten   (default: '\v((en|\s)coding:\s|fileencoding=)') ~
+
+  Pattern for testing if there is already a magic comment exists.
+  If matched, the old comment line will be overwritten,
+  otherwise the new comment is insert as a new line.
+
+                                           *ruby_enccomment-options-encodings*
+encodings           (default: see below) ~
+
+  Detect what encoding to use by search the "pattern", and set the real
+  comment string by the "comment" setting.
+
+  Default value: >
+    [{
+      'name':    'non-ascii',
+      'pattern': '[^\d0-\d128]',
+      'comment': 'encoding: utf-8'
+    }]
+< this searchs for non-ascii characters. If found, the comment body is set to
+  "encoding: utf-8".
+  Final magic comment will be set by "comment_format" of filetypes option (see
+  |ruby_enccomment-options-filetypes|), e.g. "# encoding: utf-8".
+
+==============================================================================
+CONFIGURATION EXAMPLES                       *ruby_enccomment-config-examples*
+
+To disable this plugin:
+>
+  let g:loaded_ruby_enccomment = 1
+<
+
+Default options:
+>
+  let s:DEFAULT_OPTIONS = {
+        \   'filetypes': {
+        \     'ruby': {'comment_format': '# %s'}
+        \   },
+        \   'shebang_pattern': '^#!',
+        \   'is_comment_patten': '\v((en|\s)coding:\s|fileencoding=)',
+        \   'encodings': [
+        \     {
+        \       'name':    'non-ascii',
+        \       'pattern': '[^\d0-\d128]',
+        \       'comment': 'encoding: utf-8'
+        \     },
+        \   ]
+        \ }
+<
+
+Override options, add "-# coding: utf-8" to all haml files:
+>
+  let g:ruby_enccomment_filetypes = {
+        \   'haml': {'comment_format': '-# %s'}
+        \ }
+  let g:ruby_enccomment_encodings = [
+        \   {
+        \     'name':    'I dont care',
+        \     'pattern': '.',
+        \     'comment': 'coding: utf-8'
+        \   },
+        \ ]
+<
 
 ==============================================================================
 vim:tw=78:fo=tcroq2mM:et:sts=2:sw=2:ft=help:norl:
