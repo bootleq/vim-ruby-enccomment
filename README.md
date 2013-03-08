@@ -13,7 +13,7 @@ Usage
 
 - Batch processing from zsh:
 
-    vim -p $(echo `find app/models -type f -print0` -c 'tabdo call ruby_enccomment#do(0,1)')
+    vim -p $(echo `find app/models -type f -print0`) -c 'tabdo call ruby_enccomment#do(0,1)'
 
 
 Similar Projects

@@ -43,7 +43,7 @@ ruby_enccomment#do( [{verbose} [, {inplace}]])          *ruby_enccomment#do()*
 Batch processing
 
 For batch files processing, below is an example for zsh: >
-  vim -p $(echo `find . -print0` -c 'tabdo call ruby_enccomment#do(0,1)')
+  vim -p $(echo `find . -print0`) -c 'tabdo call ruby_enccomment#do(0,1)'
 <
 this opens all files, inserts encoding comments, and saves if changed.
 
