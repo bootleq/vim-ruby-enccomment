@@ -14,7 +14,7 @@ let s:DEFAULT_OPTIONS = {
       \     },
       \   ]
       \ }
-let s:OPTION_PREFIX = 'ruby_enccomment'
+let s:OPTION_PREFIX = 'ruby_enccomment_'
 lockvar! s:OPTION_PREFIX s:DEFAULT_OPTIONS
 
 " }}} Constants
