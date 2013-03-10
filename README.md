@@ -16,11 +16,17 @@ Usage
   1. `verbose` - if `0`, no message will be echoed when no line has been inserted.
   2. `inplace` - if `1`, save the file in place after insertion.
 
----
 
-For batch files processing, below is an example for zsh:
+Batch Processing Example
+========================
+
+For zsh:
 
     vim -p $(echo `find app/models -type f -print0`) -c 'tabdo call ruby_enccomment#do(0,1)'
+
+This opens all regular files in app/models, if 'filetype' was ruby, and there
+were any non-ASCII character present, then insert a `# encoding: utf-8` line
+and write file.
 
 
 Requirements
