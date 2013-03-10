@@ -132,7 +132,7 @@ Default options:
         \ }
 <
 
-Override options, add "-# coding: utf-8" to all haml files:
+Overridden options, to add "-# coding: utf-8" to all haml files:
 >
   let g:ruby_enccomment_filetypes = {
         \   'haml': {'comment_format': '-# %s'}
