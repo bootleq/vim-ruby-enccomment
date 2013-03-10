@@ -10,6 +10,7 @@ CONTENTS                                            *ruby_enccomment-contents*
 
     Introduction  ........................ |ruby_enccomment-introduction|
     Usage  ............................... |ruby_enccomment-usage|
+    Requirements  ........................ |ruby_enccomment-requirements|
     Options  ............................. |ruby_enccomment-options|
     Config example  ...................... |ruby_enccomment-config-examples|
 
@@ -46,6 +47,16 @@ For batch files processing, below is an example for zsh: >
   vim -p $(echo `find . -print0`) -c 'tabdo call ruby_enccomment#do(0,1)'
 <
 this opens all files, inserts encoding comments, and saves if changed.
+
+==============================================================================
+REQUIREMENTS                                    *ruby_enccomment-requirements*
+
+Proper |filetype| and |syntax| settings.
+Vim must be able to detect filetypes correctly, and detect whether a line has
+syntax |group-name| as a Comment.
+
+If you can see ruby comments with correct color, there should be no problems.
+Otherwise, add something like `:syntax on` to .vimrc.
 
 ==============================================================================
 OPTIONS                                              *ruby_enccomment-options*

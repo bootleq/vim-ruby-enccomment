@@ -16,6 +16,15 @@ Usage
     vim -p $(echo `find app/models -type f -print0`) -c 'tabdo call ruby_enccomment#do(0,1)'
 
 
+Requirements
+============
+
+Proper 'filetype' and 'syntax' settings.
+
+If you see ruby comments with correct color, there should be no problems.
+Otherwise, add something like `:syntax on` to .vimrc.
+
+
 Similar Projects
 ================
 
