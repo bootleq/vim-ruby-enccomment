@@ -37,8 +37,8 @@ Call the main function: >
 ruby_enccomment#do( [{verbose} [, {inplace}]])          *ruby_enccomment#do()*
 
   Insert a "magic comment" line if necessary.
-  If {verbose} is non-zero, no message will be echoed when no line inserted.
-  If {inplace} is zero, |:update| the file in place after insertion.
+  If {verbose} is zero, no message will be echoed when no line inserted.
+  If {inplace} is non-zero, |:update| the file in place after insertion.
 
 ------------------------------------------------------------------------------
 Batch processing
